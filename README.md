@@ -4,7 +4,7 @@ I'm building a headline-generation tool for product marketing managers.
 
 ## System Architecture
 
-![image](https://github.com/aniket-mish/llm-headline-generator/assets/71699313/4483131f-4d75-4bd8-9a35-8ef458a874bd)
+<img width="1196" alt="Screenshot 2024-06-19 at 4 17 39 PM" src="https://github.com/aniket-mish/llm-headline-generator/assets/71699313/4d2fde4a-92ad-4e9d-bb61-96367c0cb7db">
 
 ## Data Extraction
 
