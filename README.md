@@ -1,6 +1,4 @@
-# Headline Generator
-
-I'm building a headline-generation tool for product marketing managers.
+# Retrieval
 
 ## System Architecture
 
