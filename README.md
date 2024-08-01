@@ -32,5 +32,65 @@ class Documents(LanceModel):
     text: str = model.SourceField()
     vector: Vector(model.ndims()) = model.VectorField()
 
-table = db.create_table("company_info", schema=Documents)
+table = db.create_table("pd_table", schema=Documents)
+```
+
+## Read data
+
+```python
+df = pd.read_csv("data.csv")
+```
+
+## Transform data into required format
+
+```python
+df["text"] = df[df.columns.to_list()].astype(str).agg(" ".join, axis=1)
+
+docs = [{"text": x} for x in df["text"]]
+```
+
+## Add docs to the table
+
+```python
+table.add(docs)
+```
+
+## Create a index on the column
+
+```python
+table.create_fts_index("text")
+```
+
+## Reranking
+
+```python
+from lancedb.rerankers import CohereReranker
+
+reranker = CohereReranker(api_key=cohere_api_key)
+```
+
+## Query
+
+```python
+query = "How many repositories does github have?"
+
+result = table.search(query, query_type="hybrid").limit(5).rerank(reranker=reranker).to_list()
+```
+
+
+## Chat
+
+```python
+from langchain_cohere import ChatCohere
+
+prompt = f"""
+Context is given below:
+{context}
+
+Answer the question using the context: {query}
+"""
+
+cohere_chat_model = ChatCohere(cohere_api_key=key)
+response = cohere_chat_model.invoke(prompt)
+print(f"Response: \n {response.content}")
 ```

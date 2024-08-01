@@ -1,0 +1,6 @@
+lancedb
+sentence-transformers
+pandas
+tantivy
+cohere
+langchain_cohere
